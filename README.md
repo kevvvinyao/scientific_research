@@ -28,8 +28,18 @@ Then we choose **this direction (Unity 3D ---- data acquisiton)** because it is 
 
 The primary task is to learn Unity 3D and C#, look for some Mars Terrain Unity package, try obtain images and depth data.
 
-## Achievement during current week
-TO BE CONTINUED
 
 ### *EXTRA INFO: change username of github to `kevvvinyao`*
+
+## Achievement during current week
+Find out the work process of function in `C#` script.
+
+Use the `python` program with `opencv` to handle the images taken before.
+
+Transform them to depth data `.txt` and grayscale images `.png`.
+
+More details and content of our achievements: see in `Unity_3D_learning_notes`
+
+
+
 
