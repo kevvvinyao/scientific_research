@@ -30,3 +30,6 @@ The primary task is to learn Unity 3D and C#, look for some Mars Terrain Unity p
 
 ## Achievement during current week
 TO BE CONTINUED
+
+### *EXTRA INFO: change username of github to `kevvvinyao`*
+
