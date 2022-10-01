@@ -9,8 +9,24 @@ The title of this project is "Mars Surface Reconstruction", which is to use UAV 
 We is responsible for the Unity part, using Unity 3D to take photos and transform it to grayscale image, including generate its depth data.
 
 # Week 1
+## Content in class
 Visit the lab. Introduced about the 4 different parts.
 
 We should find out which part we are interested in and choose one to make further exploration.
 
+## Achievement during current week
+**Since the Class Time changes**, there are only two days between two adjacent lesson. So I didn't complete the task ---- Do investigation about four aspects.
 
+Not so bad, Teacher L.L. decided to let us know those aspects in class.
+
+# Week 2
+
+## Content in class
+Watch the display of senior using `Unity 3D` and `C#` to control the camera and take pictures to analyze their depth data.
+
+Then we choose **this direction (Unity 3D ---- data acquisiton)** because it is easier than other parts, but its workload may be quite heavy.(perhaps ten thousands of images)
+
+The primary task is to learn Unity 3D and C#, look for some Mars Terrain Unity package, try obtain images and depth data.
+
+## Achievement during current week
+TO BE CONTINUED
