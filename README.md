@@ -40,6 +40,8 @@ Transform them to depth data `.txt` and grayscale images `.png`.
 
 More details and content of our achievements: see in `Unity_3D_learning_notes`
 
+> TEST ON LINUX VMWARE
+
 
 
 
