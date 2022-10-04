@@ -24,7 +24,11 @@ Not so bad, Teacher L.L. decided to let us know those aspects in class.
 ## Content in class
 Watch the display of senior using `Unity 3D` and `C#` to control the camera and take pictures to analyze their depth data.
 
-Then we choose **this direction (Unity 3D ---- data acquisiton)** because it is easier than other parts, but its workload may be quite heavy.(perhaps ten thousands of images)
+This is powered by two `C#` scripts.
+One is resiponsible for `Camera's movement`, and another is for `taking picture`.
+Both they two make up the final result  
+
+Then we choose **this direction (Unity 3D ---- data acquisiton)** because it is easier than other parts, but its workload may be quite heavy. (perhaps ten thousands of images)
 
 The primary task is to learn Unity 3D and C#, look for some Mars Terrain Unity package, try obtain images and depth data.
 
@@ -42,7 +46,9 @@ More details and content of our achievements: see in `Unity_3D_learning_notes`
 
 > TEST ON LINUX VMWARE
 
+This version is to pass the progress between two workstation.
 
+The `C#` scripts is in construction~~~
 
 
 

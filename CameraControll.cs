@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class CameraControll : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class CameraControll : MonoBehaviour
     public float rotsensityY = 5.0f;
     public float rotsensityX = 5.0f;
     public float minimumVert = -90.0f;
-    public float maximumVert = 90.0f; //ÊÇ·ñ¿ÉÒÔ¿ØÖÆÐý×ª public bool CanControl = false;
+    public float maximumVert = 90.0f; //ï¿½Ç·ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½×ª public bool CanControl = false;
+
+    StreamWriter recordheight = new StreamWriter("/Users/kevinyao/camera_height.txt", true);
+    public string str_height;
 
     float posX;
     float posY;
@@ -18,7 +22,7 @@ public class CameraControll : MonoBehaviour
     public float PossensitivitX = 1.0f;
     public float PossensitivitY = 1.0f;
 
-    // µã»÷Êó±êÓÒ¼üÐý×ªÉãÏñÍ· 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Í· 
     void CameraRot()
     {
         if (Input.GetMouseButton(1))
@@ -30,32 +34,43 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-    // ¼üÅÌ¿ØÖÆÏà»úÒÆ¶¯
+    // ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
     void myKeyboard()
     {
-        if (Input.GetKey(KeyCode.W)) // ÏòÇ° UpArrow z
+        if (Input.GetKey(KeyCode.W)) // ï¿½ï¿½Ç° UpArrow z
 
             transform.position += transform.forward * velocity;
 
-        if (Input.GetKey(KeyCode.S)) // Ïòºó DownArrow
+        if (Input.GetKey(KeyCode.S)) // ï¿½ï¿½ï¿½ DownArrow
 
             transform.position += -transform.forward * velocity;
 
-        if (Input.GetKey(KeyCode.A)) // Ïò×ó LeftArrow x
+        if (Input.GetKey(KeyCode.A)) // ï¿½ï¿½ï¿½ï¿½ LeftArrow x
 
             transform.position += -transform.right * velocity;
 
-        if (Input.GetKey(KeyCode.D)) // ÏòÓÒ RightArrow
+        if (Input.GetKey(KeyCode.D)) // ï¿½ï¿½ï¿½ï¿½ RightArrow
 
             transform.position += transform.right * velocity;
 
-        if (Input.GetKey(KeyCode.UpArrow)) // ÏòÉÏ y
+        if (Input.GetKey(KeyCode.UpArrow)) // ï¿½ï¿½ï¿½ï¿½ y
 
             transform.position += transform.up * velocity;
 
-        if (Input.GetKey(KeyCode.DownArrow)) // ÏòÏÂ
+        if (Input.GetKey(KeyCode.DownArrow)) // ï¿½ï¿½ï¿½ï¿½
 
             transform.position += -transform.up * velocity;
+        
+        if (Input.GetKey(KeyCode.Q)) {
+
+            //Debug.Log(transform.position.y);
+            // camera_height = transform.position.y;
+            // System.IO.File.WriteAllText("/Users/kevinyao/camera_height.txt", transform.position.y);
+            str_height = transform.position.y.ToString();
+            // recordheight.WriteLine(str_height);
+            Debug.Log(str_height);
+            // recordheight.Close();
+        }
     }
 
     // Update is called once per frame

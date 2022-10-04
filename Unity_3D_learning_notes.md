@@ -46,4 +46,10 @@ The content in it will run every `frame`. In other words, if you want to give an
 
 For example, movement of object should be written in the part, so that you can give it an order to move any frame
 
+Besides, any operations and judgements which need timely handle all should be added in this funtion, such as collision, hurt.
+
+In brief, if you want to make an object respond your keyboards press all the time, you should use update function.
+
+
+
 
