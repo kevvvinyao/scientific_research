@@ -1,0 +1,15 @@
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.csproj.AssemblyReference.cache
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.GeneratedMSBuildEditorConfig.editorconfig
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.AssemblyInfoInputs.cache
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.AssemblyInfo.cs
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.csproj.CoreCompileInputs.cache
+/home/kevinyao/sc/csharpPractice/bin/Debug/net6.0/csharpPractice
+/home/kevinyao/sc/csharpPractice/bin/Debug/net6.0/csharpPractice.deps.json
+/home/kevinyao/sc/csharpPractice/bin/Debug/net6.0/csharpPractice.runtimeconfig.json
+/home/kevinyao/sc/csharpPractice/bin/Debug/net6.0/csharpPractice.dll
+/home/kevinyao/sc/csharpPractice/bin/Debug/net6.0/csharpPractice.pdb
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.dll
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/refint/csharpPractice.dll
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.pdb
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/csharpPractice.genruntimeconfig.cache
+/home/kevinyao/sc/csharpPractice/obj/Debug/net6.0/ref/csharpPractice.dll

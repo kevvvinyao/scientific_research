@@ -11,7 +11,7 @@ public class CameraControll : MonoBehaviour
     public float rotsensityY = 5.0f;
     public float rotsensityX = 5.0f;
     public float minimumVert = -90.0f;
-    public float maximumVert = 90.0f; //�Ƿ���Կ�����ת public bool CanControl = false;
+    public float maximumVert = 90.0f; // public bool CanControl = false;
 
     StreamWriter recordheight = new StreamWriter("/Users/kevinyao/camera_height.txt", true);
     public string str_height;
@@ -22,7 +22,7 @@ public class CameraControll : MonoBehaviour
     public float PossensitivitX = 1.0f;
     public float PossensitivitY = 1.0f;
 
-    // �������Ҽ���ת����ͷ 
+    
     void CameraRot()
     {
         if (Input.GetMouseButton(1))
@@ -34,30 +34,29 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-    // ���̿�������ƶ�
     void myKeyboard()
     {
-        if (Input.GetKey(KeyCode.W)) // ��ǰ UpArrow z
+        if (Input.GetKey(KeyCode.W)) //  UpArrow z
 
             transform.position += transform.forward * velocity;
 
-        if (Input.GetKey(KeyCode.S)) // ��� DownArrow
+        if (Input.GetKey(KeyCode.S)) // DownArrow
 
             transform.position += -transform.forward * velocity;
 
-        if (Input.GetKey(KeyCode.A)) // ���� LeftArrow x
+        if (Input.GetKey(KeyCode.A)) // LeftArrow x
 
             transform.position += -transform.right * velocity;
 
-        if (Input.GetKey(KeyCode.D)) // ���� RightArrow
+        if (Input.GetKey(KeyCode.D)) // RightArrow
 
             transform.position += transform.right * velocity;
 
-        if (Input.GetKey(KeyCode.UpArrow)) // ���� y
+        if (Input.GetKey(KeyCode.UpArrow)) // y
 
             transform.position += transform.up * velocity;
 
-        if (Input.GetKey(KeyCode.DownArrow)) // ����
+        if (Input.GetKey(KeyCode.DownArrow)) 
 
             transform.position += -transform.up * velocity;
         
