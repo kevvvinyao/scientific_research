@@ -14,7 +14,7 @@ namespace csharpPractice
             Console.WriteLine("The x is {0}", xPos);
             Console.WriteLine("The y is {0}", yPos);
         }
-    } 
+    }
 
     class execute 
     {

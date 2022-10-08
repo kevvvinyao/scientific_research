@@ -7,10 +7,15 @@ using UnityEngine;
 
 public class Photo : MonoBehaviour
 {
+    public string str_height;
     public Camera maincamera;
     private bool start = false;
     public int num = 1;
-    public string path = "/Volumes/T7/terrain_capture";
+    public string path = "F:\\unityProject\\terrain_save";
+    
+    public float MaxHeight = 0;
+
+
 
     Texture2D CaptureCamera(Camera camera, Rect rect)
     {
@@ -32,23 +37,32 @@ public class Photo : MonoBehaviour
 
         string front;
         if (num < 10)
-            front = "/00000";
+            front = "\\00000";
         else if (num < 100)
-            front = "/0000";
+            front = "\\0000";
         else
-            front = "/000";
+            front = "\\000";
 
-        string colorpath = path + front + num;
-        string depthpath = path + "/depth" + front + num;
+        string colorpath = path + "\\img" + front + num;
+        string depthpath = path + "\\depth" + front + num;
 
         // save color images
         System.IO.File.WriteAllBytes(colorpath + ".jpg", bytes);
-        Debug.Log(string.Format("taken an image:{0}", colorpath + ".jpg"));
+        Debug.Log(string.Format("takend d d  an image:{0}", colorpath + ".jpg"));
         // save depth data
         GenerateDepthData(camera, depthpath);
         Debug.Log(string.Format("saved the depth data:{0}", depthpath + ".txt"));
 
+        Debug.Log(path);
         return screenShot;
+    }
+
+    void SaveHeightData () {
+        StreamWriter recordheight = new StreamWriter(path + "\\camera_height.txt", true);
+        str_height = transform.position.y.ToString();
+        recordheight.WriteLine(str_height);
+        Debug.Log(str_height);
+        recordheight.Close();
     }
 
     // Start is called before the first frame update
@@ -68,7 +82,7 @@ public class Photo : MonoBehaviour
         float cy = (float)h / 2;
         float[,] cameramatrix = new float[3, 3] { { fx, 0, cx }, { 0, fy, cy }, { 0, 0, 1 } };
         // write file
-        string filepath = path + "/cam.txt";
+        string filepath = path + "\\cam.txt";
         StreamWriter sw = new StreamWriter(filepath);
         for (int i = 0; i < 3; i++)
         {
@@ -88,8 +102,11 @@ public class Photo : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            
+
             CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
-            // CaptureCamera(maincamera, new Rect(0, 0, 640, 480));
+
+            SaveHeightData();
             num++;
         }
     }
@@ -115,6 +132,7 @@ public class Photo : MonoBehaviour
                 {
                     Vector3 world_point = camera.WorldToViewportPoint(hit.point);
                     sw.Write(world_point.z);
+                    
                     sw.Write("  ");
                 }
                 // no hit
