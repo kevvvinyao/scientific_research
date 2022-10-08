@@ -44,11 +44,58 @@ Transform them to depth data `.txt` and grayscale images `.png`.
 
 More details and content of our achievements: see in `Unity_3D_learning_notes`
 
-> TEST ON LINUX VMWARE
+# Week 3
 
-This version is to pass the progress between two workstation.
+## Content in class
 
-The `C#` scripts is in construction~~~
+This week, two seniors display their achievement: using `python` scripts to develop an app, which can control the **drone** to take picture along the movement path.
+
+Then the program use some algorithm to restore the original images of terrain.
+But problems are very common, such as the **drone** become overheated: What we can only do is stop working and wait it to cool.
+
+The ideal terrain should have characteristic appearance, such as stones, holes, so that it is easy and accurate to extract feature, register images, so-called `images alignment`
+
+## Achievement during current week
+
+Last week, we have completed the basic function: **Take pictures**, **transform grayscale** and **record depth**
+
+What we should optimize:
+
+1. Find a more complicated `Unity 3D` terrain.
+To reflect the performance of our algorithm.
+2. Record **height of camera**.
+We take pictures with reducing height of camera, to analyze the `3D Model`.
+
+Due to the new and strange language `C#` and software `Unity`, we do not complete above two optimization.
+
+We have learned and analyze the exsiting `C#` code and `Unity` api, but we are so good at `C#` that we cannot use `class`, `method` skillfully.
+
+About the **terrian**, we cannot find more complex source in *Taobao*.
+They seems alike to each other.
+
+
+# Week 4
+
+## Content in class
+
+Give an account of last week's achivement.
+
+Since we haven't complete our tasks, there isn't so much result to display.
+
+## achivement during current week
+
+We complete the basic function: Record the **Height** of camera.
+But there are few `Unity` Mars terrain source accord with our demand.
+
+We make a further exploration in `C#` and `Unity API`, write a function with `System.IO` to record **Height**, and add the data in an file of `.txt`
+
+Besides the fundamental funtion of `Height recoding`, we also make an attempt to realize a **camera auto-move** function.
+The main thinking: While pressing `BackSpace`, record the <u>**camera height**</u> and <u>**the most height of the terrain in the range of camera**</u>.
+Then auto move the camera after each time take photo, and make sure that **camera** won't move under the terrain.
+
+***However***, we do not complete this function as we imagine.
+The problem is that camera don't move the ideal distance each time.
+Its height only reduce several pixels one time.
 
 
 

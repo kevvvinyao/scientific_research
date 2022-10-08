@@ -4,38 +4,64 @@ using System;
 using System.IO;
 using UnityEngine;
 
-
 public class Photo : MonoBehaviour
 {
     public string str_height;
+    public float camera_height;
     public Camera maincamera;
     private bool start = false;
     public int num = 1;
     public string path = "F:\\unityProject\\terrain_save";
-    
+
+
+    public string front;
+
     public float MaxHeight = 0;
+    public float StepLength;
+    
+    public int ordnum = 1;
 
-
+    void GoForwardCaptureCamera()
+    {
+        SaveHeightData();
+        CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
+        StepLength = (camera_height - MaxHeight) / 10;
+        ordnum ++;
+        for (int i = 0; i < 9; i++)
+        {
+            transform.position += transform.forward * StepLength;
+            SaveHeightData();
+            CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
+            
+            ordnum ++;
+        }
+        ordnum = 1;
+        MaxHeight = 0;
+    }
 
     Texture2D CaptureCamera(Camera camera, Rect rect)
     {
-
         RenderTexture rt = new RenderTexture((int)rect.width, (int)rect.height, -1);
         camera.targetTexture = rt;
         camera.Render();
         RenderTexture.active = rt;
 
-        Texture2D screenShot = new Texture2D((int)rect.width, (int)rect.height, TextureFormat.RGB24, false);
+        Texture2D screenShot = new Texture2D(
+            (int)rect.width,
+            (int)rect.height,
+            TextureFormat.RGB24,
+            false
+        );
         screenShot.ReadPixels(rect, 0, 0);
         screenShot.Apply();
 
         camera.targetTexture = null;
-        RenderTexture.active = null; // JC: added to avoid errors  
+        RenderTexture.active = null; // JC: added to avoid errors
         GameObject.Destroy(rt);
 
         byte[] bytes = screenShot.EncodeToJPG();
 
-        string front;
+        
         if (num < 10)
             front = "\\00000";
         else if (num < 100)
@@ -43,23 +69,26 @@ public class Photo : MonoBehaviour
         else
             front = "\\000";
 
-        string colorpath = path + "\\img" + front + num;
-        string depthpath = path + "\\depth" + front + num;
+        string colorpath = path + "\\img" + front + num + "_" + ordnum;
+        string depthpath = path + "\\depth" + front + num + "_" + ordnum;
 
         // save color images
         System.IO.File.WriteAllBytes(colorpath + ".jpg", bytes);
-        Debug.Log(string.Format("takend d d  an image:{0}", colorpath + ".jpg"));
+        Debug.Log(string.Format("taken an image:{0}", colorpath + ".jpg"));
         // save depth data
         GenerateDepthData(camera, depthpath);
         Debug.Log(string.Format("saved the depth data:{0}", depthpath + ".txt"));
 
-        Debug.Log(path);
         return screenShot;
     }
 
-    void SaveHeightData () {
+    void SaveHeightData()
+    {
         StreamWriter recordheight = new StreamWriter(path + "\\camera_height.txt", true);
-        str_height = transform.position.y.ToString();
+        camera_height = transform.position.y;
+        str_height = camera_height.ToString();
+
+        str_height = num + "_" + ordnum + " " + str_height;
         recordheight.WriteLine(str_height);
         Debug.Log(str_height);
         recordheight.Close();
@@ -102,49 +131,79 @@ public class Photo : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
-
-            CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
-
-            SaveHeightData();
+            GoForwardCaptureCamera();
+            Debug.Log("DONE!");
             num++;
         }
     }
 
-
     void GenerateDepthData(Camera camera, string filepath)
     {
-        int width = Screen.width;        int height = Screen.height;
+        int width = Screen.width;
+        int height = Screen.height;
         // int width = (int)rect.width;
         // int height = (int)rect.height;
 
         StreamWriter sw = new StreamWriter(filepath + ".txt");
-        for (int i = height - 1; i >= 0; i--)
+
+        if (ordnum == 1)
         {
-            for (int j = 0; j < width; j++)
+            for (int i = height - 1; i >= 0; i--)
             {
-                Vector3 pos = new Vector3(j, i, 0);
-                Ray ray = camera.ScreenPointToRay(pos);
-                // Debug.DrawRay(ray.origin, ray.direction * 10, Color.black);
-                RaycastHit hit;
-                // check if hit
-                if (Physics.Raycast(ray, out hit))
+                for (int j = 0; j < width; j++)
                 {
-                    Vector3 world_point = camera.WorldToViewportPoint(hit.point);
-                    sw.Write(world_point.z);
-                    
-                    sw.Write("  ");
+                    Vector3 pos = new Vector3(j, i, 0);
+                    Ray ray = camera.ScreenPointToRay(pos);
+                    // Debug.DrawRay(ray.origin, ray.direction * 10, Color.black);
+                    RaycastHit hit;
+                    // check if hit
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        Vector3 world_point = camera.WorldToViewportPoint(hit.point);
+                        sw.Write(world_point.z);
+                        sw.Write("  ");
+                        if (world_point.z > MaxHeight) {
+                            MaxHeight = Convert.ToSingle(world_point.z);
+                        }
+                    }
+                    // no hit
+                    else
+                    {
+                        Debug.Log("No hit !");
+                        sw.Write(-1);
+                        sw.Write("  ");
+                    }
                 }
-                // no hit
-                else
-                {
-                    Debug.Log("No hit !");
-                    sw.Write(-1);
-                    sw.Write("  ");
-                }
+                sw.Write("\n");
             }
-            sw.Write("\n");
+        } else {
+            for (int i = height - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Vector3 pos = new Vector3(j, i, 0);
+                    Ray ray = camera.ScreenPointToRay(pos);
+                    // Debug.DrawRay(ray.origin, ray.direction * 10, Color.black);
+                    RaycastHit hit;
+                    // check if hit
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        Vector3 world_point = camera.WorldToViewportPoint(hit.point);
+                        sw.Write(world_point.z);
+                        sw.Write("  ");
+                    }
+                    // no hit
+                    else
+                    {
+                        Debug.Log("No hit !");
+                        sw.Write(-1);
+                        sw.Write("  ");
+                    }
+                }
+                sw.Write("\n");
+            }
         }
+
         sw.Close();
     }
 }
