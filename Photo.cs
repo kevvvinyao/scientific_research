@@ -4,10 +4,10 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class Photo : MonoBehaviour
+public class Photo2 : MonoBehaviour
 {
     public string str_height;
-    public float camera_height;
+    public float camera_height;//��������ϵ������ĸ߶�
     public Camera maincamera;
     private bool start = false;
     public int num = 1;
@@ -16,27 +16,28 @@ public class Photo : MonoBehaviour
 
     public string front;
 
-    public float MaxHeight = 0;
-    public float StepLength;
+    public float MaxHeight = 0;//��ʼʱ��ͼ�ϵ�����ĵ�����
+    public float StepLength;//���ÿ���½��Ĳ���
+    public int flag = 0;//��ģ���Ϊ1
     
-    public int ordnum = 1;
+    public int ordnum = 1;//��¼��Ƭ˳��
 
-    void GoForwardCaptureCamera()
+    void GoForwardCaptureCamera()//���������½�ͼƬ
     {
         SaveHeightData();
         CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
-        StepLength = (camera_height - MaxHeight) / 10;
+        StepLength = (MaxHeight) / 100;
         ordnum ++;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 99 && flag <= 100; i++)
         {
             transform.position += transform.forward * StepLength;
             SaveHeightData();
             CaptureCamera(maincamera, new Rect(0, 0, Screen.width, Screen.height));
-            
             ordnum ++;
         }
         ordnum = 1;
         MaxHeight = 0;
+        flag = 0;
     }
 
     Texture2D CaptureCamera(Camera camera, Rect rect)
@@ -63,14 +64,14 @@ public class Photo : MonoBehaviour
 
         
         if (num < 10)
-            front = "\\00000";
+            front = "/00000";
         else if (num < 100)
-            front = "\\0000";
+            front = "/0000";
         else
-            front = "\\000";
+            front = "/000";
 
-        string colorpath = path + "\\img" + front + num + "_" + ordnum;
-        string depthpath = path + "\\depth" + front + num + "_" + ordnum;
+        string colorpath = path + "/img" + front + num + "_" + ordnum;
+        string depthpath = path + "/depth" + front + num + "_" + ordnum;
 
         // save color images
         System.IO.File.WriteAllBytes(colorpath + ".jpg", bytes);
@@ -84,10 +85,9 @@ public class Photo : MonoBehaviour
 
     void SaveHeightData()
     {
-        StreamWriter recordheight = new StreamWriter(path + "\\camera_height.txt", true);
+        StreamWriter recordheight = new StreamWriter(path + "/camera_height.txt", true);
         camera_height = transform.position.y;
         str_height = camera_height.ToString();
-
         str_height = num + "_" + ordnum + " " + str_height;
         recordheight.WriteLine(str_height);
         Debug.Log(str_height);
@@ -111,7 +111,7 @@ public class Photo : MonoBehaviour
         float cy = (float)h / 2;
         float[,] cameramatrix = new float[3, 3] { { fx, 0, cx }, { 0, fy, cy }, { 0, 0, 1 } };
         // write file
-        string filepath = path + "\\cam.txt";
+        string filepath = path + "/cam.txt";
         StreamWriter sw = new StreamWriter(filepath);
         for (int i = 0; i < 3; i++)
         {
@@ -190,6 +190,8 @@ public class Photo : MonoBehaviour
                     {
                         Vector3 world_point = camera.WorldToViewportPoint(hit.point);
                         sw.Write(world_point.z);
+                        if (world_point.z <= StepLength)
+                            flag++;
                         sw.Write("  ");
                     }
                     // no hit
