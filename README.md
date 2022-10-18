@@ -82,7 +82,7 @@ Give an account of last week's achivement.
 
 Since we haven't complete our tasks, there isn't so much result to display.
 
-## achivement during current week
+## Achivement during current week
 
 We complete the basic function: Record the **Height** of camera.
 But there are few `Unity` Mars terrain source accord with our demand.
@@ -95,7 +95,39 @@ Then auto move the camera after each time take photo, and make sure that **camer
 
 ***However***, we do not complete this function as we imagine.
 The problem is that camera don't move the ideal distance each time.
-Its height only reduce several pixels one time.
+Its height only reduce several pixels each time.
+
+***<u>We have completed the task!!!</u>***
+Thanks to Mr.Niu, we implement the function of automatically move!!!
+The reason why we failed before is that I misunderstand the meaning of worldpoint.z.
+Now we can make step_length = (worldpoint.z)/10, so that the camera can conduct a reasonable movement.
+
+
+# Week 5
+
+## Content in class
+
+We demonstrate our achievement ---- Automatically move and take images step by step.
+
+Contact with senior, show our product.
+
+## Achievement in current week
+
+Get in touch with serveral seniors.
+
+Receive more resource, such as `Blender` model.
+Until then, what we search for is all `Unity Mars Model` instead of `Mars Model`.
+So `Blender` model is a new *explorable* field, which maybe provide us with adequate Mars model.
+
+Meanwhile, there will be a new problem to be solved ---- figure out a rational method to import the `fbx` (the file exported from Blender) to `Unity`.
+
+*Additional*: `Blender` is more used for modeling than `Unity`,so we can search for Mars model in `Blender` or other softwares.
+Then run our `C#` scripts in `Unity`.
+It's called **specialization** (maybe
+
+
+
+
 
 
 
